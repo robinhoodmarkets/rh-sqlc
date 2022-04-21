@@ -33,8 +33,9 @@ package {{.Package}}
 import (
 	{{range imports .SourceName}}
 	{{range .}}{{.}}
-	{{end}}
-	{{end}}
+    {{end}}{{end}}{{ if ne .ModelPackage ""}}
+      "{{- .ModelPackage}}"
+    {{end}}
 )
 
 {{template "interfaceCode" . }}
@@ -52,7 +53,11 @@ import (
 // versions:
 //   sqlc {{.SqlcVersion}}
 
-package {{.Package}}
+package {{ if ne .ModelPackage ""}}
+        {{- packageName .ModelPackage -}}
+    {{else}}
+        {{- .Package -}}
+    {{end}}
 
 import (
 	{{range imports .SourceName}}
@@ -127,8 +132,9 @@ package {{.Package}}
 import (
 	{{range imports .SourceName}}
 	{{range .}}{{.}}
-	{{end}}
-	{{end}}
+	{{end}}{{end}}{{ if ne .ModelPackage ""}}
+      "{{- .ModelPackage}}"
+    {{end}}
 )
 
 {{template "queryCode" . }}
@@ -153,7 +159,7 @@ import (
 	{{range imports .SourceName}}
 	{{range .}}{{.}}
 	{{end}}
-	{{end}}
+    {{end}}
 )
 
 {{template "copyfromCode" . }}
@@ -174,8 +180,9 @@ package {{.Package}}
 import (
 	{{range imports .SourceName}}
 	{{range .}}{{.}}
-	{{end}}
-	{{end}}
+	{{end}}{{end}}{{ if ne .ModelPackage ""}}
+      "{{- .ModelPackage}}"
+    {{end}}
 )
 {{template "batchCode" . }}
 {{end}}
