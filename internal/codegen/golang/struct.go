@@ -11,6 +11,7 @@ type Struct struct {
 	Name    string
 	Fields  []Field
 	Comment string
+	Package string
 }
 
 func StructName(name string, settings *plugin.Settings) string {
@@ -25,5 +26,5 @@ func StructName(name string, settings *plugin.Settings) string {
 			out += strings.Title(p)
 		}
 	}
-	return out
+	return  out
 }
